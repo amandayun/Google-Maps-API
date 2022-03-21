@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>My Google Maps</title>
+		<style>
+			#map{
+				height:400px;
+				width:100%
+			}
+		</style>
+	</head>
+	<body>
+		
+		<h1>My Google Map</h1>
+		<div id="map"></div>
+		<script>
+			function initMap() {
+				//map options
+				var options = {
+					zoom:10,
+					center: {lat:34.0522, lng:-118.2437}
+				}
+				//new map
+				var map = new google.maps.Map(document.getElementById('map'), options);
+				
+				/*
+				//add marker
+				var marker = new google.maps.Marker({
+					position:{lat:34.0739, lng: -118.2400},
+					map:map,
+					icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+				});
+				
+				var infoWindow = new google.maps.InfoWindow({
+					content: '<h1>Dodgers Stadium</h1>'
+				});
+				
+				marker.addListener('click', function(){
+					infoWindow.open(map, marker);
+				});
+				*/
+				
+				addMarker({
+					coords:{lat:34.0739, lng: -118.2400},
+					iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+					content:'<h1>Dodgers stadium</h1>'
+				});
+				addMarker({
+					coords:{lat:33.5237, lng: -117.7149},
+					content:'<h1>Laguna Niguel</h1>'
+				
+				});
+				addMarker({
+					coords:{lat:36.9741, lng: -122.0308},
+					content:'<h1>Santa Cruz</h1>'
+				});
+				
+				//add marker function
+				function addMarker(props) {
+					var marker = new google.maps.Marker({
+						position:props.coords,
+						map:map,
+						//icon: props.iconImage
+					});
+					
+					//checks for custom icon
+					if (props.iconImage) {
+						//sets icon image
+						marker.setIcon(props.iconImage);
+					}
+					
+					//check content
+					if (props.content) {
+						var infoWindow = new google.maps.InfoWindow({
+							content: props.content
+						});
+						
+						marker.addListener('click', function(){
+							infoWindow.open(map, marker);
+						});
+					}
+				}
+			}
+		</script>
+		<script async
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2LvsEVK_GhULpy5Lfc0WX81wCivtLYKM&libraries=places&callback=initMap">
+		</script>
+		
+	</body>
+</html>
