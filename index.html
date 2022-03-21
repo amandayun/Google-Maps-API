@@ -24,6 +24,12 @@
 				//new map
 				var map = new google.maps.Map(document.getElementById('map'), options);
 				
+				// listen for click on map
+				google.maps.event.addListener(map, 'click', function(event) {
+					//gets lat and long of area clicked on and adds a marker
+					addMarker({coords:event.latLng});
+				});
+				
 				/*
 				//add marker
 				var marker = new google.maps.Marker({
@@ -41,6 +47,34 @@
 				});
 				*/
 				
+				// an array of markers
+				var markers = [
+					{
+						coords:{lat:34.0739, lng: -118.2400},
+						iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+						content:'<h1>Dodgers stadium</h1>'
+					},
+					
+					{
+						coords:{lat:33.5237, lng: -117.7149},
+						content:'<h1>Laguna Niguel</h1>'
+						
+					},
+					
+					{
+						coords:{lat:36.9741, lng: -122.0308},
+						content:'<h1>Santa Cruz</h1>'
+					}
+					
+					
+				];
+				
+				//loop through markers
+				for(var i = 0; i<markers.length; i++){
+					addMarker(markers[i])
+				}
+				
+				/*
 				addMarker({
 					coords:{lat:34.0739, lng: -118.2400},
 					iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
@@ -55,6 +89,7 @@
 					coords:{lat:36.9741, lng: -122.0308},
 					content:'<h1>Santa Cruz</h1>'
 				});
+				*/
 				
 				//add marker function
 				function addMarker(props) {
